@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 07:42:06 2017 romain pillot
-** Last update Mon Jun 19 09:26:51 2017 romain pillot
+** Last update Mon Jun 19 11:28:55 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -16,7 +16,7 @@
 #include "util.h"
 #include "array.h"
 
-static const char sequences[] = {
+static const char g_sequences[] = {
   'A',
   'T',
   'G',
@@ -30,8 +30,8 @@ static bool	valid_char(char c)
   int		i;
 
   i = -1;
-  while (sequences[++i])
-    if (sequences[i] == c)
+  while (g_sequences[++i])
+    if (g_sequences[i] == c || g_sequences[i] == c - 'A' + 'a')
       return (true);
   return (false);
 }
@@ -64,7 +64,7 @@ static void	fill_sequence(t_sequence *sequence, char const *str)
   j = -1;
   while (str[++i])
     if (valid_char(str[i]))
-      cleared[++j] = str[i];
+      cleared[++j] = str[i] >= 'a' ? str[i] - 'a' + 'A' : str[i];
   if (*cleared)
     sequence->data = str_concat(sequence->data, cleared, false);
   free(cleared);
