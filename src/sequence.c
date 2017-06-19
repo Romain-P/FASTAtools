@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 07:30:08 2017 romain pillot
-** Last update Mon Jun 19 20:25:22 2017 romain pillot
+** Last update Mon Jun 19 21:15:46 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -76,4 +76,5 @@ void    write_reversed(t_sequence **seqs, int k)
 void	write_aligned(t_sequence **seqs, int k)
 {
   (void) k;
+  printf("%s\n", "alignement: bypass\n");
 }
