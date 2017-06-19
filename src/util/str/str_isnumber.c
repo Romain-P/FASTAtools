@@ -5,11 +5,11 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Jun 16 06:43:03 2017 romain pillot
-** Last update Fri Jun 16 07:26:12 2017 romain pillot
+** Last update Mon Jun 19 07:22:30 2017 romain pillot
 */
 
-#include "util.h"
 #include <stdbool.h>
+#include "util.h"
 
 bool	str_isnumber(const char *str)
 {
