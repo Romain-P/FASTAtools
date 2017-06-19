@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 07:42:06 2017 romain pillot
-** Last update Mon Jun 19 11:28:55 2017 romain pillot
+** Last update Mon Jun 19 12:21:32 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -31,7 +31,7 @@ static bool	valid_char(char c)
 
   i = -1;
   while (g_sequences[++i])
-    if (g_sequences[i] == c || g_sequences[i] == c - 'A' + 'a')
+    if (g_sequences[i] == c || g_sequences[i] == c - 'a' + 'A')
       return (true);
   return (false);
 }
@@ -83,6 +83,7 @@ t_array		*parse_sequences()
 	{
 	  if (!(sequence = malloc(sizeof(t_sequence))))
 	    return (array);
+	  sequence->data = NULL;
 	  sequence->name = strdup(str + 1);
 	  array_add(array, sequence);
 	}
