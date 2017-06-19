@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Mon Jun 19 12:10:08 2017 romain pillot
+** Last update Mon Jun 19 12:12:11 2017 romain pillot
 */
 
 #include <stdio.h>
@@ -42,7 +42,7 @@ int		main(int ac, char **args)
 {
   t_array	*array;
   t_sequence	**sequences;
-  int		*options;
+  int		options[2];
 
   if (!parse_options(options, ac, args) ||
       options[0] == -1 ||
