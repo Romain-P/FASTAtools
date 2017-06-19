@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 07:42:06 2017 romain pillot
-** Last update Mon Jun 19 12:21:32 2017 romain pillot
+** Last update Mon Jun 19 12:34:52 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -84,7 +84,7 @@ t_array		*parse_sequences()
 	  if (!(sequence = malloc(sizeof(t_sequence))))
 	    return (array);
 	  sequence->data = NULL;
-	  sequence->name = strdup(str + 1);
+	  sequence->name = strdup(str);
 	  array_add(array, sequence);
 	}
       else if (sequence)

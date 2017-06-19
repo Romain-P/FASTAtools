@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Tue May 23 14:02:04 2017 romain pillot
-** Last update Fri Jun 16 07:23:49 2017 romain pillot
+** Last update Mon Jun 19 12:38:15 2017 romain pillot
 */
 
 #ifndef UTIL_H_
@@ -30,6 +30,8 @@ int	nbr_parsestring(const char *str);
 bool	str_isnumber(const char *str);
 
 char	*str_reverse(char *str);
+
+char	*str_replace(char *str, const char target, const char new);
 
 char	*str_concat(char *a, const char *b, bool free_a);
 
