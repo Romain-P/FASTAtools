@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Mon Jun 19 12:24:04 2017 romain pillot
+** Last update Mon Jun 19 13:35:48 2017 romain pillot
 */
 
 #include <stdio.h>
@@ -49,7 +49,6 @@ int		main(int ac, char **args)
     return (_EXIT_FAILURE);
   sequences = (t_sequence **) array->values;
   g_mode[options[OPT_MODE]](sequences, options[OPT_K]);
-  return (0);
   while (*sequences)
     {
       FREE((*sequences)->name);
