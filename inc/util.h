@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Tue May 23 14:02:04 2017 romain pillot
-** Last update Mon Jun 19 12:38:15 2017 romain pillot
+** Last update Mon Jun 19 16:46:33 2017 romain pillot
 */
 
 #ifndef UTIL_H_
@@ -46,6 +46,8 @@ int	str_length(const char *str);
 int	tab_length(char **tab);
 
 char	*str_dupl(const char *str);
+
+char	*str_dupli(const char *str, int imax);
 
 int	str_countchar(const char *str, const char delimiter);
 
