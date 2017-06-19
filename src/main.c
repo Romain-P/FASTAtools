@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Mon Jun 19 12:12:11 2017 romain pillot
+** Last update Mon Jun 19 12:13:47 2017 romain pillot
 */
 
 #include <stdio.h>
@@ -49,7 +49,7 @@ int		main(int ac, char **args)
       !(array = parse_sequences()) || !array->length)
     return (_EXIT_FAILURE);
   sequences = (t_sequence **) array->values;
-  g_mode[options[0]](sequences, options[1]);
+  g_mode[options[OPT_MODE]](sequences, options[OPT_K]);
   while (*sequences)
     {
       FREE((*sequences)->name);

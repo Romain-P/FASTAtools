@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:15:51 2016 romain pillot
-** Last update Mon Jun 19 11:46:30 2017 romain pillot
+** Last update Mon Jun 19 12:13:36 2017 romain pillot
 */
 
 #ifndef TOOL_H_
@@ -15,6 +15,8 @@
 # define _EXIT_SUCCESS	(0)
 
 # define LINE_SEQ_NAME	('>')
+# define OPT_MODE	(0)
+# define OPT_K		(1)
 
 # include "array.h"
 
