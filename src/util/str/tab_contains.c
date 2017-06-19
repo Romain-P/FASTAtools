@@ -5,15 +5,15 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Jun 14 13:25:58 2017 romain pillot
-** Last update Wed Jun 14 13:27:27 2017 romain pillot
+** Last update Mon Jun 19 14:17:21 2017 romain pillot
 */
 
 #include "util.h"
 
 bool	tab_contains(char **tab, const char *str)
 {
-  while (*tab)
+  while (tab && *tab)
     if (str_equals(*tab++, str))
       return (true);
-  return (true);
+  return (false);
 }

@@ -5,10 +5,13 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 09:55:41 2017 romain pillot
-** Last update Mon Jun 19 13:31:51 2017 romain pillot
+** Last update Mon Jun 19 14:20:32 2017 romain pillot
 */
 
+#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "tool.h"
 #include "util.h"
 
@@ -31,9 +34,31 @@ void	write_reversed(t_sequence **seqs, int k)
     }
 }
 
-void	write_kmer(t_sequence **seqs, int k)
+void		write_kmer(t_sequence **seqs, int k)
 {
-  (void) k;
+  t_array	*array;
+  int		i;
+  int		j;
+  char		*tmp;
+
+  array = array_create();
+  while (*seqs++ && (i = 1))
+    while ((j = -1) && seqs[-1]->data[++i])
+      {
+	if (str_length(seqs[-1]->data + i) < k ||
+	    !(tmp = malloc(sizeof(char) * (k + 1))))
+	  break;
+	tmp[k] = 0;
+	while (++j < k)
+	  tmp[j] = (char) seqs[-1]->data[i + j];
+	if (!tab_contains((char **) array->values, tmp))
+	  array_add(array, strdup(tmp));
+	free(tmp);
+      }
+  tab_sort((char **) array->values);
+  while (++j < array->length)
+    printf("%s\n", array->values[j]);
+  array_destroy(&array, true);
 }
 
 void	write_coded(t_sequence **seqs, int k)
