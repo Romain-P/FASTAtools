@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 09:55:41 2017 romain pillot
-** Last update Mon Jun 19 21:01:03 2017 romain pillot
+** Last update Mon Jun 19 21:03:22 2017 romain pillot
 */
 
 #include <string.h>
@@ -37,7 +37,7 @@ static t_amino const g_acids[] =
   (t_amino) {'V', (char *[]) {"GTT", "GTC", "GTA", "GTG", NULL}},
   (t_amino) {'W', (char *[]) {"TGG", NULL}},
   (t_amino) {'X', NULL},
-  (t_amino) {'Y', (char *[]) {"TAT", "TAC"}},
+  (t_amino) {'Y', (char *[]) {"TAT", "TAC", NULL}},
   (t_amino) {0, NULL}
 };
 

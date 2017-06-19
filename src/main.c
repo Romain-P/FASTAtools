@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Mon Jun 19 14:15:14 2017 romain pillot
+** Last update Mon Jun 19 21:04:26 2017 romain pillot
 */
 
 #include <stdio.h>
@@ -37,7 +37,7 @@ bool	parse_options(int opts[2], int ac, char **args)
   opts[1] = args[2] ? atoi(args[2]) : -1;
   return (option == 4 ? opts[1] != -1 : true);
 }
-  
+
 int		main(int ac, char **args)
 {
   t_array	*array;
