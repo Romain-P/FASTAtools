@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 09:55:41 2017 romain pillot
-** Last update Mon Jun 19 19:28:38 2017 romain pillot
+** Last update Mon Jun 19 21:01:03 2017 romain pillot
 */
 
 #include <string.h>
@@ -15,32 +15,31 @@
 #include "tool.h"
 #include "util.h"
 
-void		write_kmer(t_sequence **seqs, int k)
+static t_amino const g_acids[] =
 {
-  t_array	*array;
-  int		i;
-  int		j;
-  char		*tmp;
-
-  array = array_create();
-  while (*seqs++ && (i = 1))
-    while ((j = -1) && seqs[-1]->data[++i])
-      {
-	if (str_length(seqs[-1]->data + i) < k ||
-	    !(tmp = malloc(sizeof(char) * (k + 1))))
-	  break;
-	tmp[k] = 0;
-	while (++j < k)
-	  tmp[j] = seqs[-1]->data[i + j];
-	if (!tab_contains((char **) array->values, tmp))
-	  array_add(array, strdup(tmp));
-	free(tmp);
-      }
-  tab_sort((char **) array->values);
-  while (++j < array->length)
-    printf("%s\n", array->values[j]);
-  array_destroy(&array, true);
-}
+  (t_amino) {'A', (char *[])  {"GCT", "GCC", "GCA", "GCG", NULL}},
+  (t_amino) {'C', (char *[]) {"TGT", "TGC", NULL}},
+  (t_amino) {'D', (char *[]) {"GAT", "GAC", NULL}},
+  (t_amino) {'E', (char *[]) {"GAA", "GAG", NULL}},
+  (t_amino) {'F', (char *[]) {"TTT", "TTC", NULL}},
+  (t_amino) {'G', (char *[]) {"GGT", "GGC", "GGA", "GGG", NULL}},
+  (t_amino) {'H', (char *[]) {"CAT", "CAC", NULL}},
+  (t_amino) {'I', (char *[]) {"ATT", "ATC", "ATA", NULL}},
+  (t_amino) {'K', (char *[]) {"AAA", "AAG", NULL}},
+  (t_amino) {'L', (char *[]) {"TTA", "TTG", "CTT", "CTC", "CTA", "CTG", 0}},
+  (t_amino) {'M', (char *[]) {"ATG", NULL}},
+  (t_amino) {'N', (char *[]) {"AAT", "AAC", NULL}},
+  (t_amino) {'P', (char *[]) {"CCT", "CCC", "CCA", "CCG", NULL}},
+  (t_amino) {'Q', (char *[]) {"CCA", "CAG", NULL}},
+  (t_amino) {'R', (char *[]) {"AGA", "AGG", "CGT", "CGC", "CGA", "CGG", 0}},
+  (t_amino) {'S', (char *[]) {"TCT", "TCC", "TCA", "TCG", "AGT", "AGC", 0}},
+  (t_amino) {'T', (char *[]) {"ACT", "ACC", "ACA", "ACG", NULL}},
+  (t_amino) {'V', (char *[]) {"GTT", "GTC", "GTA", "GTG", NULL}},
+  (t_amino) {'W', (char *[]) {"TGG", NULL}},
+  (t_amino) {'X', NULL},
+  (t_amino) {'Y', (char *[]) {"TAT", "TAC"}},
+  (t_amino) {0, NULL}
+};
 
 static bool	codon_end(char *str)
 {
@@ -49,8 +48,34 @@ static bool	codon_end(char *str)
 	  str_starts(str, "TGA"));
 }
 
-/* memory leak.. fkin norm, I NEED 2 LINES MORE*/
-static void	search_sequence(char *str)
+static char	*convert_protein(char *seq)
+{
+  char		*prot;
+  char		*tmp;
+  int		i;
+  int		j;
+  int		k;
+  int		len;
+
+  prot = malloc(sizeof(char) * ((len = (strlen(seq) / 3)) + 1));
+  prot[len] = 0;
+  i = (j = 0);
+  while (seq && i <= strlen(seq) && seq[i])
+    {
+      tmp = str_dupli(seq + i, 3);
+      if (str_contains(tmp, "N"))
+	prot[j++] = 'X';
+      else if ((k = -1))
+	while (g_acids[++k].id)
+	  if (tab_contains(g_acids[k].codons, tmp))
+	    prot[j++] = g_acids[k].id;
+      FREE(tmp);
+      i += 3;
+    }
+  return (prot);
+}
+
+static void	search_sequence(char *str, t_array *array)
 {
   int		i;
   bool		valid;
@@ -60,7 +85,7 @@ static void	search_sequence(char *str)
   i = 0;
   valid = false;
   seq = (tmp = NULL);
-  while (str[i] && strlen(str + i) >= 3)
+  while (i <= strlen(str) && str[i] && strlen(str + i) >= 3)
     {
       if (valid && seq && str_contains(seq + 3, "ATG") && !(valid = false))
 	{
@@ -70,7 +95,7 @@ static void	search_sequence(char *str)
       else if (str_starts(str + i, "ATG"))
 	valid = (seq = strdup("ATG"));
       else if ((seq && codon_end(str + i) && !(valid = false)))
-	printf("%s\n", seq);
+	(!array ? printf("%s\n", seq) : array_add(array, convert_protein(seq)));
       else if (valid)
 	seq = str_concat(seq, (tmp = str_dupli(str + i, 3)), true);
       FREE(tmp);
@@ -80,16 +105,23 @@ static void	search_sequence(char *str)
 
 void	write_coded(t_sequence **seqs, int k)
 {
-  int	i;
-  bool	display;
-  char	*str;
-
   (void) k;
   while (*seqs++)
-    search_sequence(seqs[-1]->data);
+    search_sequence(seqs[-1]->data, NULL);
 }
 
-void	write_acids(t_sequence **seqs, int k)
+void		write_acids(t_sequence **seqs, int k)
 {
+  t_array	*array;
+  int		i;
+
+  array = array_create();
   (void) k;
+  while (*seqs++)
+    search_sequence(seqs[-1]->data, array);
+  tab_sort((char **) array->values);
+  i = -1;
+  while (++i < array->length)
+    printf("%s\n", array->values[i]);
+  array_destroy(&array, true);
 }

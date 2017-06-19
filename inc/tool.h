@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:15:51 2016 romain pillot
-** Last update Mon Jun 19 12:13:36 2017 romain pillot
+** Last update Mon Jun 19 20:35:27 2017 romain pillot
 */
 
 #ifndef TOOL_H_
@@ -25,6 +25,12 @@ typedef struct	s_sequence
   char		*name;
   char		*data;
 }		t_sequence;
+
+typedef struct	s_amino
+{
+  char const	id;
+  char		**codons;
+}		t_amino;
 
 t_array	*parse_sequences();
 
