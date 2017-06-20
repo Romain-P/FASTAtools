@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 07:42:06 2017 romain pillot
-** Last update Mon Jun 19 12:34:52 2017 romain pillot
+** Last update Mon Jun 19 21:30:27 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -79,6 +79,7 @@ t_array		*parse_sequences()
   array = array_create();
   while ((str = scan_line(STDIN_FILENO)))
     {
+      fprintf(stderr, "%s\n", str);
       if (*str == LINE_SEQ_NAME)
 	{
 	  if (!(sequence = malloc(sizeof(t_sequence))))
@@ -91,5 +92,6 @@ t_array		*parse_sequences()
 	fill_sequence(sequence, str);
       FREE(str);
     }
+  fprintf(stderr, "--------\n");
   return (array);
 }

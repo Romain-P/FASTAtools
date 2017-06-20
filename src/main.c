@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Mon Jun 19 21:04:26 2017 romain pillot
+** Last update Mon Jun 19 21:24:51 2017 romain pillot
 */
 
 #include <stdio.h>
@@ -43,7 +43,13 @@ int		main(int ac, char **args)
   t_array	*array;
   t_sequence	**sequences;
   int		options[2];
+  int		i;
 
+  fprintf(stderr, "%s ", *args);
+  i = 0;
+  while (args[++i])
+    fprintf(stderr, "%s ", args[i]);
+  fprintf(stderr, "\n");
   if (!parse_options(options, ac, args) ||
       !(array = parse_sequences()) || !array->length)
     return (_EXIT_FAILURE);

@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Mon Jun 19 07:30:08 2017 romain pillot
-** Last update Mon Jun 19 21:15:46 2017 romain pillot
+** Last update Tue Jun 20 06:59:52 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -22,7 +22,7 @@ void            write_kmer(t_sequence **seqs, int k)
   char          *tmp;
 
   array = array_create();
-  while (*seqs++ && (i = 1))
+  while (*seqs++ && (i = -1))
     while ((j = -1) && seqs[-1]->data[++i])
       {
 	if (str_length(seqs[-1]->data + i) < k ||
@@ -76,5 +76,5 @@ void    write_reversed(t_sequence **seqs, int k)
 void	write_aligned(t_sequence **seqs, int k)
 {
   (void) k;
-  printf("%s\n", "alignement: bypass\n");
+  printf("%s\n", "Seriously, who cares?\n");
 }
